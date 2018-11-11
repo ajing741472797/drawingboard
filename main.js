@@ -95,7 +95,7 @@ function listenToUser(canvas){
         console.log(x,y)
         using = true
         if(eraserEnabled){
-          context.clearRect(x - 5,y - 5, 10, 10)
+          context.clearRect(x - 5,y - 5, 20, 20)
         }else{
           lastPoint = {
           "x":x,
@@ -112,7 +112,7 @@ function listenToUser(canvas){
       if(!using){return}
       //(简化了下面两个if(using)
       if(eraserEnabled){
-        context.clearRect(x - 5,y - 5, 10, 10)
+        context.clearRect(x - 5,y - 5, 20, 20)
       }else{
         var newPoint = {
           "x":x,
@@ -133,7 +133,7 @@ function listenToUser(canvas){
       var y = aaa.clientY
       using = true
       if(eraserEnabled){
-        context.clearRect(x - 5,y - 5, 10, 10)
+        context.clearRect(x - 5,y - 5, 20, 20)
       }else{
         lastPoint = {
         "x":x,
@@ -148,7 +148,7 @@ function listenToUser(canvas){
       if(!using){return}
       //(简化了下面两个if(using)
       if(eraserEnabled){
-        context.clearRect(x - 5,y - 5, 10, 10)
+        context.clearRect(x - 5,y - 5, 20, 20)
       }else{
         var newPoint = {
           "x":x,

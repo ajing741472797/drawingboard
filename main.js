@@ -4,21 +4,45 @@ var context = yyy.getContext('2d');
 autoSetCanvasSize(yyy)
 
 /**********************/
-
+//画笔橡皮切换
 listenToUser(yyy)
 
-/*****************************/
-
-
 var eraserEnabled = false
+pen.onclick = function(){
+  eraserEnabled = false
+  pen.classList.add('active')
+  eraser.classList.remove('active')
+}
 eraser.onclick = function(){
   eraserEnabled = true
-  actions.className = 'actions x'
+  eraser.classList.add('active')
+  pen.classList.remove('active')
 }
-brush.onclick = function(){
-  eraserEnabled = false
-  actions.className = 'actions'
+//画笔颜色
+red.onclick = function(){
+  context.fillStyle = 'red'
+  context.strokeStyle = 'red'
+  red.classList.add('active')
+  blue.classList.remove('active')
+  green.classList.remove('active')
 }
+blue.onclick = function(){
+  context.fillStyle = 'blue'
+  context.strokeStyle = 'blue'
+  red.classList.remove('active')
+  blue.classList.add('active')
+  green.classList.remove('active')
+}
+green.onclick = function(){
+  context.fillStyle = 'green'
+  context.strokeStyle = 'green'
+  red.classList.remove('active')
+  blue.classList.remove('active')
+  green.classList.add('active')
+}
+
+
+
 /********/
 
 function autoSetCanvasSize(canvas){
@@ -38,14 +62,12 @@ function setCanvasSize(){
 
 function drawCircle(x,y,radius){
   context.beginPath()
-  context.fillStyle = 'black'
   context.arc(x,y,radius,0, Math.PI * 2);
   context.fill()
 }
 
 function drawLine(x1, y1, x2, y2){
   context.beginPath()
-  context.strokeStyle = 'black'
   context.moveTo(x1, y1)
   context.lineWidth = 5
   context.lineTo(x2, y2)
@@ -83,7 +105,7 @@ function listenToUser(canvas){
         }
   
     canvas.ontouchmove = function(aaa){
-      console.log('边摸变动')
+      console.log('边摸边动')
       var x = aaa.touches[0].clientX
       var y = aaa.touches[0].clientY
       

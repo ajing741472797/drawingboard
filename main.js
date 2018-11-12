@@ -1,12 +1,20 @@
+
 var canvas = document.getElementById('xxx');
 var context = canvas.getContext('2d');
+var using = false
+var lastPoint = {
+  x:undefined,
+  y:undefined
+}
+
+
+//画板逻辑
 
 autoSetCanvasSize(canvas)
 
-/**********************/
-//画笔橡皮切换
 listenToUser(canvas)
 
+//画笔、橡皮切换
 var eraserEnabled = false
 pen.onclick = function(){
   eraserEnabled = false
@@ -24,32 +32,117 @@ black.onclick = function(){
   context.strokeStyle = 'black'
   black.classList.add('active')
   red.classList.remove('active')
+  yellow.classList.remove('active')
   blue.classList.remove('active')
   green.classList.remove('active')
+  orange.classList.remove('active')
+  pink.classList.remove('active')
+  purple.classList.remove('active')
+  gold.classList.remove('active')
 }
 red.onclick = function(){
   context.fillStyle = 'red'
   context.strokeStyle = 'red'
   black.classList.remove('active')
   red.classList.add('active')
+  yellow.classList.remove('active')
   blue.classList.remove('active')
   green.classList.remove('active')
+  orange.classList.remove('active')
+  pink.classList.remove('active')
+  purple.classList.remove('active')
+  gold.classList.remove('active')
+}
+yellow.onclick = function(){
+  context.fillStyle = '#ffe600'
+  context.strokeStyle = '#ffe600'
+  black.classList.remove('active')
+  red.classList.remove('active')
+  yellow.classList.add('active')
+  blue.classList.remove('active')
+  green.classList.remove('active')
+  orange.classList.remove('active')
+  pink.classList.remove('active')
+  purple.classList.remove('active')
+  gold.classList.remove('active')
 }
 blue.onclick = function(){
-  context.fillStyle = 'blue'
-  context.strokeStyle = 'blue'
+  context.fillStyle = 'DeepSkyBlue'
+  context.strokeStyle = 'DeepSkyBlue'
   black.classList.remove('active')
   red.classList.remove('active')
+  yellow.classList.remove('active')
   blue.classList.add('active')
   green.classList.remove('active')
+  orange.classList.remove('active')
+  pink.classList.remove('active')
+  purple.classList.remove('active')
+  gold.classList.remove('active')
 }
 green.onclick = function(){
-  context.fillStyle = 'green'
-  context.strokeStyle = 'green'
+  context.fillStyle = '#b2d235'
+  context.strokeStyle = '#b2d235'
   black.classList.remove('active')
   red.classList.remove('active')
+  yellow.classList.remove('active')
   blue.classList.remove('active')
   green.classList.add('active')
+  orange.classList.remove('active')
+  pink.classList.remove('active')
+  purple.classList.remove('active')
+  gold.classList.remove('active')
+}
+orange.onclick = function(){
+  context.fillStyle = 'orange'
+  context.strokeStyle = 'orange'
+  black.classList.remove('active')
+  red.classList.remove('active')
+  yellow.classList.remove('active')
+  blue.classList.remove('active')
+  green.classList.remove('active')
+  orange.classList.add('active')
+  pink.classList.remove('active')
+  purple.classList.remove('active')
+  gold.classList.remove('active')
+}
+pink.onclick = function(){
+  context.fillStyle = '#f58f98'
+  context.strokeStyle = '#f58f98'
+  black.classList.remove('active')
+  red.classList.remove('active')
+  yellow.classList.remove('active')
+  blue.classList.remove('active')
+  green.classList.remove('active')
+  orange.classList.remove('active')
+  pink.classList.add('active')
+  purple.classList.remove('active')
+  gold.classList.remove('active')
+}
+purple.onclick = function(){
+  context.fillStyle = '#8552a1'
+  context.strokeStyle = '#8552a1'
+  black.classList.remove('active')
+  red.classList.remove('active')
+  yellow.classList.remove('active')
+  blue.classList.remove('active')
+  green.classList.remove('active')
+  orange.classList.remove('active')
+  pink.classList.remove('active')
+  purple.classList.add('active')
+  gold.classList.remove('active')
+}
+gold.onclick = function(){
+  context.fillStyle = '#ad8b3d'
+  context.strokeStyle = '#ad8b3d'
+  black.classList.remove('active')
+  red.classList.remove('active')
+  yellow.classList.remove('active')
+  blue.classList.remove('active')
+  green.classList.remove('active')
+  orange.classList.remove('active')
+  pink.classList.remove('active')
+  purple.classList.remove('active')
+  gold.classList.add('active')
 }
 //画笔粗细
 thin.onclick = function(){
@@ -87,14 +180,14 @@ save.onclick = function(){
 
 
 /********/
-
+//自动设置canvas画板宽高
 function autoSetCanvasSize(canvas){
   setCanvasSize()
   
   window.onresize = function(){
   setCanvasSize()
   }
-
+//重置canvas画板宽高
 function setCanvasSize(){
   var pageWidth = document.documentElement.clientWidth
   var pageHeight = document.documentElement.clientHeight
@@ -117,16 +210,9 @@ function drawLine(x1, y1, x2, y2){
   context.closePath()
 }
 
-/****/
+/**********************/
 
 function listenToUser(canvas){
-  
-
-  var using = false
-  var lastPoint = {
-    x:undefined,
-    y:undefined
-  }
 
   //特性检测
   if(document.body.ontouchstart !== undefined){
@@ -137,7 +223,7 @@ function listenToUser(canvas){
         console.log(x,y)
         using = true
         if(eraserEnabled){
-          context.clearRect(x - 5,y - 5, 20, 20)
+          context.clearRect(x - 10,y - 10, 20, 20)
         }else{
           lastPoint = {
           "x":x,
@@ -154,7 +240,7 @@ function listenToUser(canvas){
       if(!using){return}
       //(简化了下面两个if(using)
       if(eraserEnabled){
-        context.clearRect(x - 5,y - 5, 20, 20)
+        context.clearRect(x - 10,y - 10, 20, 20)
       }else{
         var newPoint = {
           "x":x,
@@ -183,6 +269,7 @@ function listenToUser(canvas){
         }
        }
       }
+      //鼠标移动监听
       canvas.onmousemove = function(aaa){
       var x = aaa.clientX
       var y = aaa.clientY
@@ -201,10 +288,9 @@ function listenToUser(canvas){
         }
       
       }
-    
+    //鼠标移动监听
     canvas.onmouseup = function(aaa){
       using = false
       }
     }
-  
   }

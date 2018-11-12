@@ -1,11 +1,11 @@
-var yyy = document.getElementById('xxx');
-var context = yyy.getContext('2d');
+var canvas = document.getElementById('xxx');
+var context = canvas.getContext('2d');
 
-autoSetCanvasSize(yyy)
+autoSetCanvasSize(canvas)
 
 /**********************/
 //画笔橡皮切换
-listenToUser(yyy)
+listenToUser(canvas)
 
 var eraserEnabled = false
 pen.onclick = function(){
@@ -19,9 +19,18 @@ eraser.onclick = function(){
   pen.classList.remove('active')
 }
 //画笔颜色
+black.onclick = function(){
+  context.fillStyle = 'black'
+  context.strokeStyle = 'black'
+  black.classList.add('active')
+  red.classList.remove('active')
+  blue.classList.remove('active')
+  green.classList.remove('active')
+}
 red.onclick = function(){
   context.fillStyle = 'red'
   context.strokeStyle = 'red'
+  black.classList.remove('active')
   red.classList.add('active')
   blue.classList.remove('active')
   green.classList.remove('active')
@@ -29,6 +38,7 @@ red.onclick = function(){
 blue.onclick = function(){
   context.fillStyle = 'blue'
   context.strokeStyle = 'blue'
+  black.classList.remove('active')
   red.classList.remove('active')
   blue.classList.add('active')
   green.classList.remove('active')
@@ -36,11 +46,44 @@ blue.onclick = function(){
 green.onclick = function(){
   context.fillStyle = 'green'
   context.strokeStyle = 'green'
+  black.classList.remove('active')
   red.classList.remove('active')
   blue.classList.remove('active')
   green.classList.add('active')
 }
+//画笔粗细
+thin.onclick = function(){
+  context.lineWidth = 1
+  thin.classList.add('active')
+  medium.classList.remove('active')
+  thick.classList.remove('active')
+}
+medium.onclick = function(){
+  context.lineWidth = 3
+  thin.classList.remove('active')
+  medium.classList.add('active')
+  thick.classList.remove('active')
+}
+thick.onclick = function(){
+  context.lineWidth = 6
+  thin.classList.remove('active')
+  medium.classList.remove('active')
+  thick.classList.add('active')
+}
 
+//画布清除
+clear.onclick = function(){
+  context.clearRect(0, 0, canvas.width, canvas.height);
+}
+//画布保存
+save.onclick = function(){
+  var url = canvas.toDataURL('image/png');
+    var a = document.createElement('a');
+    document.body.appendChild(a);
+    a.href=url;
+    a.download='my drawing';
+    a.click();                          
+}
 
 
 /********/
@@ -69,7 +112,6 @@ function drawCircle(x,y,radius){
 function drawLine(x1, y1, x2, y2){
   context.beginPath()
   context.moveTo(x1, y1)
-  context.lineWidth = 5
   context.lineTo(x2, y2)
   context.stroke()
   context.closePath()

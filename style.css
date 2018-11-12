@@ -19,7 +19,9 @@ ul,ol{
     position: fixed;
     top: 0px;
     left: 0px;
+    cursor: url('./方形.png'), default;
   }
+
   body{
     overflow: hidden;
   }

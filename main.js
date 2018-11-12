@@ -180,6 +180,11 @@ save.onclick = function(){
 
 
 /********/
+/********/
+/********/
+
+
+
 //自动设置canvas画板宽高
 function autoSetCanvasSize(canvas){
   setCanvasSize()
@@ -187,15 +192,23 @@ function autoSetCanvasSize(canvas){
   window.onresize = function(){
   setCanvasSize()
   }
+}
+//防止手机上画板上下移动
+function preventBehavior(eee) {
+  eee.preventDefault()
+}
+  
+document.addEventListener("touchmove", preventBehavior, false)
+
 //重置canvas画板宽高
 function setCanvasSize(){
   var pageWidth = document.documentElement.clientWidth
   var pageHeight = document.documentElement.clientHeight
   canvas.width =pageWidth
   canvas.height = pageHeight
-  }
 }
 
+//drawLine
 function drawCircle(x,y,radius){
   context.beginPath()
   context.arc(x,y,radius,0, Math.PI * 2);
